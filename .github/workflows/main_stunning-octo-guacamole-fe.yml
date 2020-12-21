@@ -23,7 +23,7 @@ jobs:
     - name: Set up Node.js version
       uses: actions/setup-node@v1
       with:
-        node-version: '12.x'
+        node-version: ${{ env.NODE_VERSION }}
 
     - name: npm install, build, and test
       run: |
@@ -38,4 +38,4 @@ jobs:
         app-name: 'stunning-octo-guacamole-fe'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_c72b167a0f8a4ea4a6363121d3d63b20 }}
-        package: .
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}

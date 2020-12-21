@@ -10,7 +10,6 @@ on:
 
 env:
   AZURE_WEBAPP_NAME: my-app-name   # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: ./fe      # set this to the path to your web app project, defaults to the repository root
   NODE_VERSION: '12.x'                # set this to the node version to use 
 
 jobs:
@@ -30,7 +29,6 @@ jobs:
         npm install
         npm run build --if-present
         npm run test --if-present
-      working-directory: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }} # set to the folder with your app if it is not the root directory
 
     - name: 'Deploy to Azure Web App'
       uses: azure/webapps-deploy@v2
@@ -38,4 +36,4 @@ jobs:
         app-name: 'stunning-octo-guacamole-fe'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_c72b167a0f8a4ea4a6363121d3d63b20 }}
-        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+        package: .
